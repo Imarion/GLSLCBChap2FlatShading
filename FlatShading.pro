@@ -13,15 +13,14 @@ SOURCES += main.cpp \
     vertex.cpp \
     vertexcol.cpp \
     vertextex.cpp \
-    teapot.cpp
+    vbomesh.cpp
 
 HEADERS += \
     FlatShading.h \
     vertex.h \
     vertexcol.h \
-    vertextex.h \
-    teapotdata.h \
-    teapot.h
+    vertextex.h \    
+    vbomesh.h
 
 OTHER_FILES += \
     vshader_2sides.txt \

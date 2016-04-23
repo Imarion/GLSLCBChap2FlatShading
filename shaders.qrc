@@ -4,5 +4,6 @@
         <file>vshader_ads.txt</file>
         <file>fshader_2sides.txt</file>
         <file>vshader_2sides.txt</file>
+        <file>bs_ears.obj</file>
     </qresource>
 </RCC>
