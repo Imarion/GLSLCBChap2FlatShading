@@ -13,6 +13,7 @@
 #include <QOpenGLShaderProgram>
 
 #include "teapot.h"
+#include "vbomesh.h"
 
 #define ToRadian(x) ((x) * M_PI / 180.0f)
 #define ToDegree(x) ((x) * 180.0f / M_PI)
@@ -58,7 +59,7 @@ private:
     GLuint mPositionBufferHandle, mColorBufferHandle;
     GLuint mRotationMatrixLocation;
 
-    Teapot  *mTeapot;
+    VBOMesh *mOgre;
     QMatrix4x4 ModelMatrixSimpleADS, ModelMatrix2Sided, ViewMatrix, ProjectionMatrix;
 
     //debug

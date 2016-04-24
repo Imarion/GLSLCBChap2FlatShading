@@ -15,18 +15,22 @@ using std::string;
 class VBOMesh
 {
 private:   
+    unsigned int nFaces;
+
     // Vertices
-    vector <QVector3D> points;
+    float *v;
+    unsigned int nVerts;
 
     // Normals
-    vector <QVector3D> normals;
+    float *n;
 
     // Tex coords
-    vector <QVector2D> texCoords;
+    float *tc;
 
     // Elements
-    vector <unsigned int> faces;
-    unsigned int nFaces;
+    unsigned int *el;
+
+    float *tang;
 
     bool reCenterMesh, loadTex, genTang;
 
@@ -50,17 +54,18 @@ private:
 
 public:
     VBOMesh( const char * fileName, bool reCenterMesh = false, bool loadTc = false, bool genTangents = false );
+    ~VBOMesh();
 
     void render() const;
 
     void loadOBJ( const char * fileName );
 
-    QVector3D *getv();
-    int    getnVerts();
-    QVector3D *getn();
-    QVector2D *gettc();
-    unsigned int *getfaces();
-    unsigned int    getnFaces();
+    float *getv();
+    unsigned int getnVerts();
+    float *getn();
+    float *gettc();
+    unsigned int *getelems();
+    unsigned int  getnFaces();
 };
 
 #endif // VBOMESH_H

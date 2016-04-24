@@ -11,10 +11,21 @@ using std::ifstream;
 using std::istringstream;
 
 VBOMesh::VBOMesh(const char * fileName, bool center, bool loadTc, bool genTangents) :
+        nFaces(0), v(0), nVerts(0), n(0), tc(0), el(0), tang(0),
         reCenterMesh(center), loadTex(loadTc), genTang(genTangents)
 {
     loadOBJ(fileName);
 }
+
+VBOMesh::~VBOMesh()
+{
+    delete [] v;
+    delete [] n;
+    if( tc != NULL ) delete [] tc;
+    if( tang != NULL ) delete [] tang;
+    delete [] el;
+}
+
 
 void VBOMesh::render() const {
     /*
@@ -25,7 +36,10 @@ void VBOMesh::render() const {
 
 void VBOMesh::loadOBJ( const char * fileName ) {
 
-    nFaces = 0;
+    vector <QVector3D> points;
+    vector <QVector3D> normals;
+    vector <QVector2D> texCoords;
+    vector <unsigned int> faces;
 
     ifstream objStream( fileName, std::ios::in );
 
@@ -276,13 +290,11 @@ void VBOMesh::storeVBO( const vector<QVector3D> & points,
                         const vector<QVector4D> &tangents,
                         const vector<unsigned int> &elements )
 {
-    unsigned int nVerts  = (unsigned int) points.size();
+    nVerts = (unsigned int) points.size();
     nFaces = (unsigned int) elements.size() / 3;
 
-    float * v = new float[3 * nVerts];
-    float * n = new float[3 * nVerts];
-    float * tc = NULL;
-    float * tang = NULL;
+    v = new float[3 * nVerts];
+    n = new float[3 * nVerts];
 
     if(texCoords.size() > 0) {
         tc = new float[ 2 * nVerts];
@@ -290,7 +302,7 @@ void VBOMesh::storeVBO( const vector<QVector3D> & points,
             tang = new float[4*nVerts];
     }
 
-    unsigned int *el = new unsigned int[elements.size()];
+    el = new unsigned int[elements.size()];
 
     int idx = 0, tcIdx = 0, tangIdx = 0;
     for( unsigned int i = 0; i < nVerts; ++i )
@@ -360,12 +372,6 @@ void VBOMesh::storeVBO( const vector<QVector3D> & points,
 
     glBindVertexArray(0);
 */
-    // Clean up
-    delete [] v;
-    delete [] n;
-    if( tc != NULL ) delete [] tc;
-    if( tang != NULL ) delete [] tang;
-    delete [] el;
 }
 
 void VBOMesh::trimString( string & str ) {
@@ -377,29 +383,29 @@ void VBOMesh::trimString( string & str ) {
     str.erase(location + 1);
 }
 
-QVector3D *VBOMesh::getv()
+float *VBOMesh::getv()
 {
-    return points.data();
+    return v;
 }
 
-int VBOMesh::getnVerts()
+unsigned int VBOMesh::getnVerts()
 {
-    return points.size();
+    return nVerts;
 }
 
-QVector3D *VBOMesh::getn()
+float *VBOMesh::getn()
 {
-    return normals.data();
+    return n;
 }
 
-QVector2D *VBOMesh::gettc()
+float *VBOMesh::gettc()
 {
-    return texCoords.data();
+    return tc;
 }
 
-unsigned int *VBOMesh::getfaces()
+unsigned int *VBOMesh::getelems()
 {
-    return faces.data();
+    return el;
 }
 
 unsigned int VBOMesh::getnFaces()

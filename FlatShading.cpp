@@ -91,20 +91,20 @@ void MyWindow::CreateVertexBuffer()
 {
     QMatrix4x4 transform;
     transform.translate(QVector3D(0.0f, 1.5f, 0.25f));
-    mTeapot = new Teapot(13, transform);
+    mOgre = new VBOMesh("bs_ears.obj");
 
     // Create and populate the buffer objects
     unsigned int handle[3];
     glGenBuffers(3, handle);        
 
     glBindBuffer(GL_ARRAY_BUFFER, handle[0]);
-    glBufferData(GL_ARRAY_BUFFER, (3 * mTeapot->getnVerts()) * sizeof(float), mTeapot->getv(), GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, (3 * mOgre->getnVerts()) * sizeof(float), mOgre->getv(), GL_STATIC_DRAW);
 
     glBindBuffer(GL_ARRAY_BUFFER, handle[1]);
-    glBufferData(GL_ARRAY_BUFFER, (3 * mTeapot->getnVerts()) * sizeof(float), mTeapot->getn(), GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, (3 * mOgre->getnVerts()) * sizeof(float), mOgre->getn(), GL_STATIC_DRAW);
 
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, handle[2]);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, 6 * mTeapot->getnFaces() * sizeof(unsigned int), mTeapot->getelems(), GL_STATIC_DRAW);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, 3 * mOgre->getnFaces() * sizeof(unsigned int), mOgre->getelems(), GL_STATIC_DRAW);
 
     // Setup the VAO
     // Vertex positions
@@ -196,7 +196,7 @@ void MyWindow::render()
         mProgramSimpleADS->setUniformValue("NormalMatrix", mv1.normalMatrix());
         mProgramSimpleADS->setUniformValue("MVP", ProjectionMatrix * mv1);
 
-        glDrawElements(GL_TRIANGLES, 6 * mTeapot->getnFaces(), GL_UNSIGNED_INT, ((GLubyte *)NULL + (0)));
+        glDrawElements(GL_TRIANGLES, 6 * mOgre->getnFaces(), GL_UNSIGNED_INT, ((GLubyte *)NULL + (0)));
 
         glDisableVertexAttribArray(0);
         glDisableVertexAttribArray(1);
@@ -224,7 +224,7 @@ void MyWindow::render()
         mProgram2Sides->setUniformValue("NormalMatrix", mv2.normalMatrix());
         mProgram2Sides->setUniformValue("MVP", ProjectionMatrix * mv2);
 
-        glDrawElements(GL_TRIANGLES, 6 * mTeapot->getnFaces(), GL_UNSIGNED_INT, ((GLubyte *)NULL + (0)));
+        glDrawElements(GL_TRIANGLES, 6 * mOgre->getnFaces(), GL_UNSIGNED_INT, ((GLubyte *)NULL + (0)));
 
         glDisableVertexAttribArray(0);
         glDisableVertexAttribArray(1);
