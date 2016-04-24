@@ -48,7 +48,7 @@ private:
     QOpenGLContext *mContext;
     QOpenGLFunctions_4_3_Core *mFuncs;
 
-    QOpenGLShaderProgram *mProgramSimpleADS, *mProgram2Sides;
+    QOpenGLShaderProgram *mProgram2SidesFlat;
 
     QTimer mRepaintTimer;
     double currentTimeMs;
@@ -60,7 +60,7 @@ private:
     GLuint mRotationMatrixLocation;
 
     VBOMesh *mOgre;
-    QMatrix4x4 ModelMatrixSimpleADS, ModelMatrix2Sided, ViewMatrix, ProjectionMatrix;
+    QMatrix4x4 ModelMatrix2SidedFlat, ViewMatrix, ProjectionMatrix;
 
     //debug
     void printMatrix(const QMatrix4x4& mat);

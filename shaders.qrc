@@ -2,7 +2,7 @@
     <qresource prefix="/">
         <file>fshader_ads.txt</file>
         <file>vshader_ads.txt</file>
-        <file>fshader_2sides.txt</file>
-        <file>vshader_2sides.txt</file>
+        <file>fshader_2sides_flat.txt</file>
+        <file>vshader_2sides_flat.txt</file>
     </qresource>
 </RCC>

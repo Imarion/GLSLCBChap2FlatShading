@@ -26,14 +26,6 @@ VBOMesh::~VBOMesh()
     delete [] el;
 }
 
-
-void VBOMesh::render() const {
-    /*
-    glBindVertexArray(vaoHandle);
-    glDrawElements(GL_TRIANGLES, 3 * faces, GL_UNSIGNED_INT, ((GLubyte *)NULL + (0)));
-    */
-}
-
 void VBOMesh::loadOBJ( const char * fileName ) {
 
     vector <QVector3D> points;
@@ -331,47 +323,6 @@ void VBOMesh::storeVBO( const vector<QVector3D> & points,
     {
         el[i] = elements[i];
     }
-    /*
-    glGenVertexArrays( 1, &vaoHandle );
-    glBindVertexArray(vaoHandle);
-
-    int nBuffers = 3;
-    if( tc != NULL ) nBuffers++;
-    if( tang != NULL ) nBuffers++;
-    GLuint elementBuffer = nBuffers - 1;
-
-    uint handle[5];
-    uint bufIdx = 0;
-    glGenBuffers(nBuffers, handle);
-
-    glBindBuffer(GL_ARRAY_BUFFER, handle[bufIdx++]);
-    glBufferData(GL_ARRAY_BUFFER, (3 * nVerts) * sizeof(float), v, GL_STATIC_DRAW);
-    glVertexAttribPointer( (GLuint)0, 3, GL_FLOAT, GL_FALSE, 0, ((GLubyte *)NULL + (0)) );
-    glEnableVertexAttribArray(0);  // Vertex position
-
-    glBindBuffer(GL_ARRAY_BUFFER, handle[bufIdx++]);
-    glBufferData(GL_ARRAY_BUFFER, (3 * nVerts) * sizeof(float), n, GL_STATIC_DRAW);
-    glVertexAttribPointer( (GLuint)1, 3, GL_FLOAT, GL_FALSE, 0, ((GLubyte *)NULL + (0)) );
-    glEnableVertexAttribArray(1);  // Vertex normal
-
-    if( tc != NULL ) {
-        glBindBuffer(GL_ARRAY_BUFFER, handle[bufIdx++]);
-        glBufferData(GL_ARRAY_BUFFER, (2 * nVerts) * sizeof(float), tc, GL_STATIC_DRAW);
-        glVertexAttribPointer( (GLuint)2, 2, GL_FLOAT, GL_FALSE, 0, ((GLubyte *)NULL + (0)) );
-        glEnableVertexAttribArray(2);  // Texture coords
-    }
-    if( tang != NULL ) {
-        glBindBuffer(GL_ARRAY_BUFFER, handle[bufIdx++]);
-        glBufferData(GL_ARRAY_BUFFER, (4 * nVerts) * sizeof(float), tang, GL_STATIC_DRAW);
-        glVertexAttribPointer( (GLuint)3, 4, GL_FLOAT, GL_FALSE, 0, ((GLubyte *)NULL + (0)) );
-        glEnableVertexAttribArray(3);  // Tangent vector
-    }
-
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, handle[elementBuffer]);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, 3 * faces * sizeof(unsigned int), el, GL_STATIC_DRAW);
-
-    glBindVertexArray(0);
-*/
 }
 
 void VBOMesh::trimString( string & str ) {

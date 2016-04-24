@@ -23,8 +23,8 @@ HEADERS += \
     vbomesh.h
 
 OTHER_FILES += \
-    vshader_2sides.txt \
-    fshader_2sides.txt \
+    vshader_2sides_flat.txt \
+    fshader_2sides_flat.txt \
     fshader_ads.txt \
     vshader_ads.txt
 
@@ -32,7 +32,7 @@ RESOURCES += \
     shaders.qrc
 
 DISTFILES += \
-    vshader_2sides.txt \
-    fshader_2sides.txt \
+    vshader_2sides_flat.txt \
+    fshader_2sides_flat.txt \
     fshader_ads.txt \
     vshader_ads.txt
